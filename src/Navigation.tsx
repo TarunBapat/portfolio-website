@@ -20,7 +20,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {["Home", "About", "Projects", "Experience", "Blog", "Contact"].map(
+            {["Home", "About", "Projects", "Experience", "Contact"].map(
               (item) => (
                 <button
                   key={item}
@@ -72,7 +72,7 @@ const Navigation: React.FC<NavigationProps> = ({
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden pb-4 bg-gray-800/95 rounded-lg mt-2">
-            {["Home", "About", "Projects", "Experience", "Blog", "Contact"].map(
+            {["Home", "About", "Projects", "Experience", "Contact"].map(
               (item) => (
                 <button
                   key={item}

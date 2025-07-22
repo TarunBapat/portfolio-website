@@ -22,6 +22,14 @@ export const skills = [
     color: "bg-purple-100 text-purple-800 border border-purple-200",
   },
   {
+    name: "JavaScript",
+    color: "bg-purple-100 text-purple-800 border border-red-200",
+  },
+  {
+    name: "MySQL",
+    color: "bg-yellow-100 text-yellow-800 border border-yellow-200",
+  },
+  {
     name: "Python",
     color: "bg-amber-100 text-amber-800 border border-amber-200",
   },
@@ -51,6 +59,7 @@ export const projects = [
     tech: ["React", "Node.js", "PostgreSQL", "Stripe"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/johndoe/ecommerce",
+    featured: false,
   },
   {
     id: 2,
@@ -62,6 +71,7 @@ export const projects = [
     tech: ["React", "Firebase", "Material-UI", "PWA"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/johndoe/taskapp",
+    featured: false,
   },
   {
     id: 3,
@@ -73,6 +83,7 @@ export const projects = [
     tech: ["Vue.js", "Chart.js", "OpenWeather API", "Tailwind"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/johndoe/weather",
+    featured: false,
   },
 ];
 
