@@ -2,6 +2,7 @@ import useScrollToSections from "./utils/useScrollToSections";
 import { personalInfo } from "./constants";
 import { Download, Mail, ChevronDown } from "lucide-react";
 import profileImageUrl from "/tarun.jpeg";
+import resumeUrl from "/Tarun_Bapat_Resume.pdf";
 
 const Hero = () => {
   const scrollToSection = useScrollToSections();
@@ -47,7 +48,7 @@ const Hero = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
-                href={personalInfo.resumeUrl}
+                href={resumeUrl}
                 download
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 group"
               >
