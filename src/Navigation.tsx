@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useScrollToSections from "./utils/useScrollToSections";
 import type { NavigationProps } from "./interfaces/NavigationProps";
 import { personalInfo } from "./constants";
@@ -10,6 +10,29 @@ const Navigation: React.FC<NavigationProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollToSection = useScrollToSections(setIsMenuOpen);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    console.log("sections", sections);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        console.log("entries", entries);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute("id");
+            console.log("sectionId", sectionId);
+            if (sectionId) {
+              setActiveSection(sectionId);
+            }
+          }
+        });
+      },
+      { threshold: 0.3 } // Adjust threshold as needed
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, [setActiveSection]);
   return (
     <nav className="fixed top-0 w-full bg-gray-900/95 backdrop-blur-md z-50 border-b border-cyan-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

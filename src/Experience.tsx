@@ -1,6 +1,7 @@
 import { Briefcase, Calendar, ChevronRight, MapPin } from "lucide-react";
 import { useState } from "react";
 import { experiences } from "./constants";
+import TechStacks from "./TechStacks";
 
 const Experience = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -129,14 +130,7 @@ const Experience = () => {
                         Technologies
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {exp.tech.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-600 text-slate-200 text-sm font-medium rounded-full border border-slate-500/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                        <TechStacks project={{ tech: exp.tech }} />
                       </div>
                     </div>
                   </div>

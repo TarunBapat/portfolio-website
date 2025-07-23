@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { projects } from "./constants";
 import { useState } from "react";
+import TechStacks from "./TechStacks";
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -178,21 +179,7 @@ const Projects = () => {
                   </p>
 
                   {/* Tech stack */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.tech.slice(0, 3).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-md border border-slate-600/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.tech.length > 3 && (
-                      <span className="px-2 py-1 bg-slate-700/50 text-slate-400 text-xs rounded-md border border-slate-600/30">
-                        +{project.tech.length - 3}
-                      </span>
-                    )}
-                  </div>
+                  <TechStacks project={{ tech: project.tech }} value={1} />
 
                   {/* Links */}
                   <div className="flex gap-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">

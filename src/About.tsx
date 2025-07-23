@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { personalInfo, skills } from "./constants";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, User } from "lucide-react";
 const About = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -12,7 +12,12 @@ const About = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full border border-purple-500/20 mb-6">
+            <User className="w-4 h-4 text-purple-400" />
+            <span className="text-sm text-purple-300 font-medium">About</span>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-purple-100 to-pink-200 bg-clip-text text-transparent mb-6">
             About Me
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
