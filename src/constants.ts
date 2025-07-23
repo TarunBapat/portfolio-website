@@ -8,7 +8,7 @@ export const personalInfo = {
   github: "https://github.com/TarunBapat/",
   linkedin: "https://www.linkedin.com/in/tarun-bapat/",
   twitter: "https://x.com/TarunBapat",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "src/Tarun_Bapat_Resume.pdf",
 };
 
 export const skills = [
