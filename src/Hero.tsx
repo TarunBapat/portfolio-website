@@ -1,12 +1,12 @@
 import useScrollToSections from "./utils/useScrollToSections";
 import { personalInfo } from "./constants";
 import { Download, Mail, ChevronDown } from "lucide-react";
+import profileImageUrl from "/tarun.jpeg";
 
 const Hero = () => {
   const scrollToSection = useScrollToSections();
 
   // Replace this with your actual image URL or import
-  const profileImageUrl = "src/tarun.jpeg"; // Update this path
 
   return (
     <section
