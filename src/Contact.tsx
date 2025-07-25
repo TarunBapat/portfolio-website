@@ -33,6 +33,7 @@ const Contact = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (formData.email.trim() == "" || formData.name.trim() == "") return;
     setIsSubmitting(true);
 
     await axios.post(
