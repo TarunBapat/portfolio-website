@@ -12,14 +12,12 @@ const Navigation: React.FC<NavigationProps> = ({
 
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
-    console.log("sections", sections);
+
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log("entries", entries);
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.getAttribute("id");
-            console.log("sectionId", sectionId);
             if (sectionId) {
               setActiveSection(sectionId);
             }

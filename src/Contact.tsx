@@ -42,7 +42,7 @@ const Contact = () => {
       },
       { headers: { Accept: "application/json" } }
     );
-    console.log("Response:", res);
+    setIsSubmitting(false);
   };
 
   return (
