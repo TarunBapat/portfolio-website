@@ -57,10 +57,6 @@ export const skills = [
     color: "bg-orange-100 text-orange-800 border border-orange-200",
   },
   { name: "Docker", color: "bg-blue-100 text-blue-800 border border-blue-200" },
-  {
-    name: "GraphQL",
-    color: "bg-pink-100 text-pink-800 border border-pink-200",
-  },
 ];
 
 export const projects = [
