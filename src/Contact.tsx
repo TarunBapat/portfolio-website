@@ -35,7 +35,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const res = await axios.post(
+    await axios.post(
       apiUrl,
       {
         ...formData,
