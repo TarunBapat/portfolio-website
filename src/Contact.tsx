@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { personalInfo } from "./constants";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,18 +30,19 @@ const Contact = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
-      alert("Thank you for your message! I'll get back to you soon.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setIsSubmitting(false);
-    }, 1000);
+    const res = await axios.post(
+      apiUrl,
+      {
+        ...formData,
+      },
+      { headers: { Accept: "application/json" } }
+    );
+    console.log("Response:", res);
   };
 
   return (
