@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import useScrollToSections from "./utils/useScrollToSections";
 import type { NavigationProps } from "./interfaces/NavigationProps";
 import { personalInfo } from "./constants";
+import { Sparkles } from "lucide-react";
+
+const navItems = ["Home", "About", "Projects", "Experience", "Contact"];
 
 const Navigation: React.FC<NavigationProps> = ({
   activeSection,
@@ -36,6 +40,7 @@ const Navigation: React.FC<NavigationProps> = ({
       setLoading(false);
     } catch (error) {
       console.error("Error fetching persona:", error);
+      setLoading(false);
     }
   };
 
@@ -53,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({
           }
         });
       },
-      { threshold: 0.3 } // Adjust threshold as needed
+      { threshold: 0.3 }
     );
     sections.forEach((section) => observer.observe(section));
     return () => {
@@ -62,85 +67,71 @@ const Navigation: React.FC<NavigationProps> = ({
   }, [setActiveSection]);
 
   return (
-    <nav className="fixed top-0 w-full bg-gray-900/95 backdrop-blur-md z-50 border-b border-cyan-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50 border-b border-zinc-800">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <button
+            onClick={() => scrollToSection("home")}
+            className="font-display text-lg font-semibold text-zinc-100"
+          >
             {personalInfo.name}
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-8">
-              {["Home", "About", "Projects", "Experience", "Contact"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className={`text-sm font-medium transition-colors relative group ${
-                      activeSection === item.toLowerCase()
-                        ? "text-cyan-400"
-                        : "text-gray-300 hover:text-white"
-                    }`}
-                  >
-                    {item}
-                    <span
-                      className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transform transition-transform ${
-                        activeSection === item.toLowerCase()
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
-                      }`}
+          <div className="hidden md:flex items-center gap-8">
+            <div className="flex gap-8">
+              {navItems.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`text-sm font-medium transition-colors relative py-1 ${
+                    activeSection === item.toLowerCase()
+                      ? "text-zinc-100"
+                      : "text-zinc-400 hover:text-zinc-100"
+                  }`}
+                >
+                  {item}
+                  {activeSection === item.toLowerCase() && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-accent-400"
                     />
-                  </button>
-                )
-              )}
+                  )}
+                </button>
+              ))}
             </div>
 
-            {/* Separator */}
-            <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
+            <div className="w-px h-5 bg-zinc-800" />
 
-            {/* AI Chat Button */}
             <button
               onClick={handlePersona}
-              className="relative group overflow-hidden rounded-xl px-4 py-2 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 hover:shadow-xl"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 bg-accent-500 hover:bg-accent-600 text-white text-sm font-medium transition-colors"
             >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-              {/* Content */}
-              <div className="relative flex items-center gap-2 text-white font-medium text-sm">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                {loading ? <span>Loading...</span> : <span>Ask AI</span>}
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              </div>
+              <Sparkles className="w-4 h-4" />
+              {loading ? "Loading..." : "Ask AI"}
             </button>
           </div>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-zinc-900 transition-colors"
+            aria-label="Toggle menu"
           >
-            <div className="w-6 h-6 relative flex flex-col justify-center">
+            <div className="w-5 h-5 relative flex flex-col justify-center gap-1.5">
               <span
-                className={`block h-0.5 w-full bg-white transition-all duration-300 ${
-                  isMenuOpen ? "rotate-45 translate-y-0.5" : "mb-1.5"
+                className={`block h-px w-full bg-zinc-100 transition-all duration-300 ${
+                  isMenuOpen ? "rotate-45 translate-y-2" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-full bg-white transition-all duration-300 ${
-                  isMenuOpen ? "opacity-0" : "mb-1.5"
+                className={`block h-px w-full bg-zinc-100 transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-full bg-white transition-all duration-300 ${
-                  isMenuOpen ? "-rotate-45 -translate-y-0.5" : ""
+                className={`block h-px w-full bg-zinc-100 transition-all duration-300 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                 }`}
               />
             </div>
@@ -148,45 +139,39 @@ const Navigation: React.FC<NavigationProps> = ({
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden pb-4 space-y-1">
-            <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-2 border border-gray-700/50">
-              {["Home", "About", "Projects", "Experience", "Contact"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className="block w-full text-left py-3 px-4 text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-gray-700/50 rounded-lg transition-all duration-200"
-                  >
-                    {item}
-                  </button>
-                )
-              )}
-            </div>
-
-            {/* Mobile AI Button */}
-            <button
-              onClick={handlePersona}
-              className="w-full relative group overflow-hidden rounded-xl px-4 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden"
             >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <div className="pb-4 space-y-1">
+                <div className="bg-zinc-900 rounded-xl p-2 border border-zinc-800">
+                  {navItems.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => scrollToSection(item.toLowerCase())}
+                      className="block w-full text-left py-3 px-4 text-sm font-medium text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800/60 rounded-lg transition-colors"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
 
-              {/* Content */}
-              <div className="relative flex items-center justify-center gap-3 text-white font-medium">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                <button
+                  onClick={handlePersona}
+                  className="w-full flex items-center justify-center gap-2 rounded-xl px-4 py-3 bg-accent-500 hover:bg-accent-600 text-white font-medium transition-colors"
                 >
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <span>Ask AI </span>
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <Sparkles className="w-4 h-4" />
+                  {loading ? "Loading..." : "Ask AI"}
+                </button>
               </div>
-            </button>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );

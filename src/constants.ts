@@ -11,52 +11,19 @@ export const personalInfo = {
 };
 
 export const skills = [
-  { name: "React", color: "bg-cyan-100 text-cyan-800 border border-cyan-200" },
-  {
-    name: "Node.js",
-    color: "bg-emerald-100 text-emerald-800 border border-emerald-200",
-  },
-  {
-    name: "TypeScript",
-    color: "bg-purple-100 text-purple-800 border border-purple-200",
-  },
-  {
-    name: "JavaScript",
-    color: "bg-purple-100 text-purple-800 border border-red-200",
-  },
-  {
-    name: "HTML",
-    color: "bg-yellow-100 text-yellow-800 border border-yellow-200",
-  },
-  {
-    name: "CSS",
-    color: "bg-blue-100 text-blue-800 border border-blue-200",
-  },
-  {
-    name: "Tailwind CSS",
-    color: "bg-pink-100 text-pink-800 border border-pink-200",
-  },
-  {
-    name: "GraphQL",
-    color: "bg-indigo-100 text-indigo-800 border border-indigo-200",
-  },
-  {
-    name: "MySQL",
-    color: "bg-yellow-100 text-yellow-800 border border-yellow-200",
-  },
-  {
-    name: "Python",
-    color: "bg-amber-100 text-amber-800 border border-amber-200",
-  },
-  {
-    name: "PostgreSQL",
-    color: "bg-indigo-100 text-indigo-800 border border-indigo-200",
-  },
-  {
-    name: "AWS",
-    color: "bg-orange-100 text-orange-800 border border-orange-200",
-  },
-  { name: "Docker", color: "bg-blue-100 text-blue-800 border border-blue-200" },
+  "React",
+  "Node.js",
+  "TypeScript",
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "Tailwind CSS",
+  "GraphQL",
+  "MySQL",
+  "Python",
+  "PostgreSQL",
+  "AWS",
+  "Docker",
 ];
 
 export const projects = [

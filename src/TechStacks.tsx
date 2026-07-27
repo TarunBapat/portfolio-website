@@ -6,42 +6,31 @@ interface ProjectProps {
   };
   value?: number;
 }
+
 const TechStacks: React.FC<ProjectProps> = ({ project, value }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
+  const chipClass =
+    value === 1
+      ? "px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md border border-zinc-700"
+      : "px-3 py-1.5 bg-zinc-800 text-zinc-300 text-sm font-medium rounded-full border border-zinc-700 hover:border-accent-500/50 transition-colors";
+
+  const visibleTech = showAll ? project.tech : project.tech.slice(0, 3);
+
   return (
     <div className="flex flex-wrap gap-1.5 mb-4">
-      {showAll
-        ? project.tech.map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className={
-                value == 1
-                  ? "px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-md border border-slate-600/30"
-                  : "px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-600 text-slate-200 text-sm font-medium rounded-full border border-slate-500/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5"
-              }
-            >
-              {tech}
-            </span>
-          ))
-        : project.tech.slice(0, 3).map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className={
-                value == 1
-                  ? "px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded-md border border-slate-600/30"
-                  : "px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-600 text-slate-200 text-sm font-medium rounded-full border border-slate-500/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5"
-              }
-            >
-              {tech}
-            </span>
-          ))}
+      {visibleTech.map((tech, techIndex) => (
+        <span key={techIndex} className={chipClass}>
+          {tech}
+        </span>
+      ))}
       {!showAll && project.tech.length > 3 && (
-        <span
-          className="px-2 py-1 bg-slate-700/50 text-slate-400 text-xs rounded-full border border-slate-600/30"
+        <button
+          type="button"
           onClick={() => setShowAll(true)}
+          className="px-2 py-1 bg-zinc-800 text-zinc-400 text-xs rounded-full border border-zinc-700 hover:text-zinc-200 transition-colors"
         >
           +{project.tech.length - 3}
-        </span>
+        </button>
       )}
     </div>
   );

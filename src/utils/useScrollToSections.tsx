@@ -8,6 +8,7 @@ const useScrollToSections = (
       document
         .getElementById(sectionId)
         ?.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen?.(false);
     },
     [setIsMenuOpen]
   );
