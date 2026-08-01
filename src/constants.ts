@@ -53,14 +53,15 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Netflix Clone",
+    title: "Carpool",
     description:
-      "A full-stack application replicating Netflix's UI and functionality, featuring user authentication, dynamic content rendering, and integration with TMDB API for fetching movie data.",
+      "A ride-sharing platform that connects drivers and riders heading the same way, with route matching, ride requests, and trip management.",
     image:
-      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop",
-    tech: ["CSS3", "ReactJS", "Redux", "Firebase", "Tailwind"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/johndoe/weather",
+      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=250&fit=crop",
+    tech: ["React", "Node.js", "MongoDB", "Express"],
+    liveUrl:
+      "https://car-pool-8jmc5cmdp-tarun-bapats-projects-0938dcd4.vercel.app",
+    githubUrl: personalInfo.github,
     featured: false,
   },
 ];
