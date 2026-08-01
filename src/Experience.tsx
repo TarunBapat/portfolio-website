@@ -1,10 +1,18 @@
-import { Briefcase, Calendar, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { Briefcase } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { experiences } from "./constants";
-import TechStacks from "./TechStacks";
 import { fadeUp, viewportOnce } from "./utils/motion";
+import ExperienceItem from "./ExperienceItem";
 
 const Experience = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <section
       id="experience"
@@ -36,77 +44,15 @@ const Experience = () => {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div ref={timelineRef} className="relative">
           <div className="absolute left-6 top-2 bottom-2 w-px bg-zinc-800" />
+          <motion.div
+            className="absolute left-6 top-2 w-px bg-gradient-to-b from-accent-400 to-accent-500 origin-top"
+            style={{ height: lineHeight }}
+          />
 
           {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              transition={{ delay: index * 0.1 }}
-              className="relative flex items-start mb-12 last:mb-0"
-            >
-              <div className="absolute left-4 top-2 w-4 h-4 bg-accent-500 rounded-full border-4 border-zinc-950 z-10" />
-
-              <div className="ml-16 w-full">
-                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 transition-colors duration-300 hover:border-zinc-700">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 gap-4">
-                    <div>
-                      <h3 className="text-xl font-display font-semibold text-zinc-100 mb-1">
-                        {exp.title}
-                      </h3>
-                      <span className="text-accent-400 font-medium">
-                        {exp.company}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-2 lg:items-end text-sm text-zinc-400 shrink-0">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-zinc-500" />
-                        <span>{exp.period}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-zinc-500" />
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-zinc-300 mb-6 leading-relaxed">
-                    {exp.description}
-                  </p>
-
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-zinc-200 mb-3 text-sm tracking-wide uppercase">
-                      Key Achievements
-                    </h4>
-                    <ul className="space-y-2.5">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-3 text-zinc-300 leading-relaxed"
-                        >
-                          <span className="w-1.5 h-1.5 bg-accent-400 rounded-full mt-2 shrink-0" />
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-zinc-200 mb-3 text-sm tracking-wide uppercase">
-                      Technologies
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      <TechStacks project={{ tech: exp.tech }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <ExperienceItem key={exp.id} exp={exp} index={index} />
           ))}
         </div>
       </div>
